@@ -46,6 +46,6 @@ for submission in subreddit.new(limit=29):
             posts_replied_to.append(submission.id)
 
 # Write our updated list back to the file
-with open("posts_replied_to.txt", "w") as f:
+with open("post_reply_history.txt", "w") as f:
     for post_id in posts_replied_to:
         f.write(post_id + "\n")
