@@ -6,7 +6,18 @@ print("The next line outputs the current working directory. Be sure your praw.in
 print(os.getcwd())
 
 #This should pull your setting from the [bot1] section of your praw.ini
-reddit = praw.Reddit("bot1")
+#NOTE: Currently cannot get praw.ini to work
+#reddit = praw.Reddit("bot1")
+
+reddit = praw.Reddit(
+    username="",
+    password="",
+    client_id="",
+    client_secret="",
+#    refresh_token="",
+    redirect_uri="http://localhost:8080",
+    user_agent="",
+)
 
 #This is where you put the 'code' string from oauth1.py instert it in between the double quotes.
 print("/nThe next line, if run properly, will output your refresh_token which needs to be included in your praw.ini in order to permenantly access reddit/n")

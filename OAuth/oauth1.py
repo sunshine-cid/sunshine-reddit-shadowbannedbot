@@ -6,7 +6,18 @@ print("The next line outputs the current working directory. Be sure your praw.in
 print(os.getcwd())
 
 #This should pull your setting from the [bot1] section of your praw.ini
-reddit = praw.Reddit("bot1")
+#NOTE: Currently cannot get praw.ini to work
+#reddit = praw.Reddit("bot1")
+
+reddit = praw.Reddit(
+    username="",
+    password="",
+    client_id="",
+    client_secret="",
+#    refresh_token="",
+    redirect_uri="http://localhost:8080",
+    user_agent="",
+)
 
 print("The next line is a url you'll need to copy and visit in a browser which is logged in as the username you configured in praw.ini")
 #For the string on the next line under 'scope' I have included some default access privelages. 
