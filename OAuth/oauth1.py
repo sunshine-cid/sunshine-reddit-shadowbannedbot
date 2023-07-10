@@ -28,6 +28,6 @@ print("after visiting the url and approving the bots access you'll be redirected
 print("Copy the string between the = and /# for use in oauth2.py")
 
 #Always checking that the settings in praw.ini are not the reason something isn't working
-print("The next lines should be your praw.ini configured username and user agent string")
+print("The next lines should be your praw.ini configured username and user agent string. Though they may error if you're not authenticated.")
 print(reddit.user.me())
 print(reddit.config.user_agent)

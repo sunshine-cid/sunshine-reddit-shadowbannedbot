@@ -2,7 +2,7 @@
 import os
 import praw
 
-print("The next line outputs the current working directory. Be sure your praw.ini is configured and in the right place/n")
+print("The next line outputs the current working directory. Be sure your praw.ini is configured and in the right place")
 print(os.getcwd())
 
 #This should pull your setting from the [bot1] section of your praw.ini
@@ -26,6 +26,6 @@ reddit = praw.Reddit(
 reddit.subreddit("test").submit("Test Submission", url="https://reddit.com")
 
 #Always checking that the settings in praw.ini are not the reason something isn't working
-print("/nThe next lines should be your praw.ini configured username and user agent string/n")
+print("The next lines should be your praw.ini configured username and user agent string. Though they may error if you're not authenticated.")
 print(reddit.user.me())
 print(reddit.config.user_agent)
