@@ -20,14 +20,14 @@ else:
         posts_replied_to = posts_replied_to.split("\n")
         posts_replied_to = list(filter(None, posts_replied_to))
 
-for submission in subreddit.new(limit=10):
+for submission in subreddit.new(limit=29):
     # If we haven't replied to this post before
     if submission.id not in posts_replied_to:
 
-        # Do a case insensitive search
-        if re.search("*", submission.title, re.IGNORECASE):
+        # Do a case insensitive search for any_non_whitespace_char + anything_wildcard
+        if re.search("\S?", submission.title, re.IGNORECASE):
             # Reply to the post
-            submission.reply("We can read your post. If you have low karma it may impact you posting in other places. This action was performed by a bot.")
+            submission.reply("This bot can read your post. Which ultimately means you're NOT shadow banned. Be aware though, If you have low karma (it varies by subreddit) it may impact you posting in other places. Again, this action was performed by a bot. If you reply to this message you may not get a response.")
             print("Bot replying to : ", submission.title)
 
             # Store the current id into our list
