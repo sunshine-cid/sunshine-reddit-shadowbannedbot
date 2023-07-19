@@ -10,7 +10,7 @@ import time
 
 #Now it should include your refresh token which should let us post from the bot.
 #If you've no idea what's going on here refer to the OAuth subdirectory, 
-# and the oauth*.py steps for PRAW and Reddit authentication.
+#and the oauth*.py steps for PRAW and Reddit authentication.
 reddit = praw.Reddit(
     username="",
     client_id="",
@@ -20,14 +20,25 @@ reddit = praw.Reddit(
     user_agent="",
 )
 
+#This is the message which will be submitted by the bot as a reply
+bot_message = ("Beep, boop. This bot can read your post."
+               "Which ultimately means you're NOT shadow banned. Be aware "
+               "though, If you have low karma it may impact you posting "
+               "in other places. What is considered *low* varies by subreddit."
+               " Again, this action was performed by a bot. "
+               "If you reply to this message you may not get a response.")
+
+#This is the time to sleep, in seconds, between while-loop cycles
+sleep_time = 300 #300 is 5 minutes
+
 subreddit = reddit.subreddit("ShadowBanned")
 
 while True:
     print("ShadowBanBot running - press [CTRL]-C to Exit")
 
+    # Thanks to https://github.com/shantnu for the majority of this code
     # Check if a post_reply_history.txt file exists
     # If not, make it, If yes filter out previously replied to posts
-    # Thanks to https://github.com/shantnu for the majority of this code
     if not os.path.isfile("post_reply_history.txt"):
         post_reply_history = []
     else:
@@ -44,7 +55,7 @@ while True:
             # Do a case insensitive search for any_char + anything_repeated
             if re.search(".?", submission.title, re.IGNORECASE):
                 # Reply to the post
-                submission.reply("This bot can read your post. Which ultimately means you're NOT shadow banned. Be aware though, If you have low karma (it varies by subreddit) it may impact you posting in other places. Again, this action was performed by a bot. If you reply to this message you may not get a response.")
+                submission.reply(bot_message)
                 print("Bot replying to : ", submission.title)
 
                 # Store the current id into our list
@@ -55,5 +66,5 @@ while True:
         for post_id in post_reply_history:
             f.write(post_id + "\n")
 
-    #Wait 5 minutes between loops
-    time.sleep(300)
+    #Wait between loops
+    time.sleep(sleep_time)
