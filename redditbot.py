@@ -26,11 +26,14 @@ reddit = praw.Reddit(
 
 #This is the message which will be submitted by the bot as a reply
 BOT_MESSAGE = ("Beep, boop. This bot can read your post. "
-               "Which ultimately means you're NOT shadow banned. Be aware "
-               "though, If you have low karma it may impact you posting "
+               "Which ultimately means you're NOT shadow banned."
+               "This bot works by replying to posts it can **see**. If you're "
+               "shadow banned, it WILL NOT reply to your post until you're unbanned. "
+               "Be aware, If you have low karma it may impact you posting "
                "in other places. What is considered *low* varies by subreddit."
                " Again, this action was performed by a bot. "
-               "If you reply to this message you may not get a response.")
+               "If you reply to this message you may not get a response. "
+               " Sometimes this bot breaks! So be patient, it may take up to a day to reply.")
 
 #This is the time to sleep, in seconds, between while-loop cycles
 SLEEP_TIME = 300 #300 is 5 minutes
