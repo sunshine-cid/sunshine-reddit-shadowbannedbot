@@ -40,39 +40,42 @@ SLEEP_TIME = 300 #300 is 5 minutes
 
 subreddit = reddit.subreddit("ShadowBanned")
 
-while True:
-    print("ShadowBanBot running - press [CTRL]-C to Exit")
+try:
+    while True:
+        print("ShadowBanBot running - press [CTRL]-C to Exit")
 
-    # Thanks to https://github.com/shantnu for the majority of this code
-    # Check if a post_reply_history.txt file exists
-    # If not, make it, If yes filter out previously replied to posts
-    if not os.path.isfile("post_reply_history.txt"):
-        post_reply_history = []
-    else:
-        # Read the file into a list and remove any empty values
-        with open("post_reply_history.txt", "r", encoding="utf-8") as f:
-            post_reply_history = f.read()
-            post_reply_history = post_reply_history.split("\n")
-            post_reply_history = list(filter(None, post_reply_history))
+        # Thanks to https://github.com/shantnu for the majority of this code
+        # Check if a post_reply_history.txt file exists
+        # If not, make it, If yes filter out previously replied to posts
+        if not os.path.isfile("post_reply_history.txt"):
+            post_reply_history = []
+        else:
+            # Read the file into a list and remove any empty values
+            with open("post_reply_history.txt", "r", encoding="utf-8") as f:
+                post_reply_history = f.read()
+                post_reply_history = post_reply_history.split("\n")
+                post_reply_history = list(filter(None, post_reply_history))
 
-    for submission in subreddit.new(limit=29):
-        # If we haven't replied to this post before
-        if submission.id not in post_reply_history:
+        for submission in subreddit.new(limit=29):
+            # If we haven't replied to this post before
+            if submission.id not in post_reply_history:
 
-            # Do a case insensitive search for any_char + anything_repeated
-            if re.search(".?", submission.title, re.IGNORECASE):
-                # Reply to the post
-                submission.reply(BOT_MESSAGE)
-                print("Bot replying to : ", submission.title)
+                # Do a case insensitive search for any_char + anything_repeated
+                if re.search(".?", submission.title, re.IGNORECASE):
+                    # Reply to the post
+                    submission.reply(BOT_MESSAGE)
+                    print("Bot replying to : ", submission.title)
 
-                # Store the current id into our list
-                post_reply_history.append(submission.id)
+                    # Store the current id into our list
+                    post_reply_history.append(submission.id)
 
-    # Write our updated list back to the file
-    with open("post_reply_history.txt", "w", encoding="utf-8") as f:
-        for post_id in post_reply_history:
-            f.write(post_id + "\n")
+        # Write our updated list back to the file
+        with open("post_reply_history.txt", "w", encoding="utf-8") as f:
+            for post_id in post_reply_history:
+                f.write(post_id + "\n")
 
-    #Wait between loops
-    time.sleep(SLEEP_TIME)
+        #Wait between loops
+        time.sleep(SLEEP_TIME)
+except:
+    print("ShadowBanBot had an exception, sleeping", SLEEP_TIME, "seconds - press [CTRL]-C to Exit")
     
